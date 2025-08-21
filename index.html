@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luanna</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+            line-height: 1.7;
+            color: #1a1a1a;
+            background: #fafafa;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 40px;
+            color: #2563eb;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .message-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 60px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border: 1px solid #f1f5f9;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .message {
+            font-size: 1.1rem;
+            color: #374151;
+            line-height: 1.7;
+            text-align: center;
+            margin: 0;
+        }
+
+        .qualities-section {
+            margin-bottom: 80px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .qualities-title {
+            font-size: 1.25rem;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .qualities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+        }
+
+        .quality {
+            background: white;
+            padding: 24px 16px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f1f5f9;
+        }
+
+        .quality:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .quality-emoji {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .quality-text {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .hug-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 60px;
+            border: 1px solid #f1f5f9;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        .hug-title {
+            font-size: 1.25rem;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .hug-emoji {
+            font-size: 4rem;
+            margin: 20px 0;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .hug-emoji.animated {
+            animation: hugBounce 1s ease-in-out;
+        }
+
+        @keyframes hugBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .hug-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .hug-btn:hover:not(:disabled) {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+        }
+
+        .hug-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .hug-message {
+            margin-top: 20px;
+            color: #2563eb;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .hug-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .final-message {
+            text-align: center;
+            padding: 40px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.8s forwards;
+        }
+
+        .final-title {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .final-text {
+            color: #6b7280;
+            font-size: 1.125rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile First Responsive Design */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .hero {
+                padding: 40px 0;
+                min-height: 100vh;
+            }
+            
+            .name {
+                font-size: 2.2rem;
+                margin-bottom: 24px;
+                line-height: 1.1;
+            }
+            
+            .message-card {
+                padding: 20px 16px;
+                margin-bottom: 30px;
+            }
+            
+            .message {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+            
+            .qualities-section {
+                margin-bottom: 50px;
+            }
+            
+            .qualities-title {
+                font-size: 0.95rem;
+                margin-bottom: 16px;
+            }
+            
+            .qualities {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .quality {
+                padding: 20px 16px;
+            }
+            
+            .quality-emoji {
+                font-size: 1.8rem;
+                margin-bottom: 8px;
+            }
+            
+            .quality-text {
+                font-size: 0.85rem;
+            }
+            
+            .hug-section {
+                padding: 30px 20px;
+                margin-bottom: 40px;
+            }
+            
+            .hug-title {
+                font-size: 1.1rem;
+                margin-bottom: 20px;
+            }
+            
+            .hug-emoji {
+                font-size: 3rem;
+                margin: 15px 0;
+            }
+            
+            .hug-btn {
+                padding: 10px 28px;
+                font-size: 0.9rem;
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .final-message {
+                padding: 30px 20px;
+            }
+            
+            .final-title {
+                font-size: 1.25rem;
+                margin-bottom: 12px;
+                line-height: 1.3;
+            }
+            
+            .final-text {
+                font-size: 1rem;
+            }
+        }
+
+        /* Tablet */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+            
+            .name {
+                font-size: 2.8rem;
+            }
+            
+            .qualities {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+            
+            .hug-section {
+                padding: 35px 30px;
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 769px) {
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .qualities {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 320px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .name {
+                font-size: 2rem;
+            }
+            
+            .message {
+                font-size: 0.9rem;
+            }
+            
+            .hug-section {
+                padding: 24px 16px;
+            }
+            
+            .hug-btn {
+                padding: 8px 24px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1 class="name">Luanna</h1>
+            
+            <div class="message-card">
+                <p class="message">
+                    Quando cheguei aqui, você me acolheu com carinho. Sua bondade e atenção não passaram despercebidas. Muito obrigada!
+                </p>
+            </div>
+            
+            <div class="qualities-section">
+                <h2 class="qualities-title">Suas Qualidades (Comigo kkkk)</h2>
+                <div class="qualities">
+                    <div class="quality">
+                        <span class="quality-emoji">💬</span>
+                        <div class="quality-text">Comunicativa</div>
+                    </div>
+                    <div class="quality">
+                        <span class="quality-emoji">😊</span>
+                        <div class="quality-text">Alegre</div>
+                    </div>
+                    <div class="quality">
+                        <span class="quality-emoji">💝</span>
+                        <div class="quality-text">Cuidadosa</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hug-section">
+                <h3 class="hug-title">Abraço Virtual</h3>
+                <span class="hug-emoji" id="hugEmoji">🤗</span>
+                <button class="hug-btn" id="hugBtn" onclick="sendHug()">
+                    Clique aqui!
+                </button>
+            </div>
+            
+            <div class="final-message">
+                <h3 class="final-title">Continue sendo essa pessoa incrível! ✨</h3>
+                <p class="final-text">Obrigada por ser quem você é!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isHugging = false;
+
+        function sendHug() {
+            if (isHugging) return;
+            
+            isHugging = true;
+            
+            const btn = document.getElementById('hugBtn');
+            const emoji = document.getElementById('hugEmoji');
+            const message = document.getElementById('hugMessage');
+            
+            btn.textContent = 'Abraçando... 🤗';
+            btn.disabled = true;
+            
+            emoji.classList.add('animated');
+            
+            setTimeout(() => {
+                message.classList.add('show');
+            }, 300);
+            
+            setTimeout(() => {
+                btn.textContent = 'Clique aqui!';
+                btn.disabled = false;
+                emoji.classList.remove('animated');
+                message.classList.remove('show');
+                isHugging = false;
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
