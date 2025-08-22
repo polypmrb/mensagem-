@@ -25,6 +25,78 @@
             padding: 0 24px;
         }
 
+        /* Gift Box Section */
+        .gift-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .gift-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-container:hover {
+            transform: scale(1.05);
+        }
+
+        .gift-box {
+            font-size: 6rem;
+            margin-bottom: 30px;
+            animation: giftFloat 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes giftFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .gift-message {
+            font-size: 1.5rem;
+            color: #2563eb;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .gift-instruction {
+            font-size: 1.1rem;
+            color: #6b7280;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Main Content (initially hidden) */
+        .main-content {
+            display: none;
+            opacity: 0;
+            animation: contentFadeIn 1s ease forwards;
+        }
+
+        .main-content.show {
+            display: block;
+        }
+
+        @keyframes contentFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .hero {
             min-height: 100vh;
             display: flex;
@@ -219,87 +291,99 @@
             .container {
                 padding: 0 20px;
             }
-            
+
+            .gift-box {
+                font-size: 4rem;
+            }
+
+            .gift-message {
+                font-size: 1.2rem;
+            }
+
+            .gift-instruction {
+                font-size: 1rem;
+            }
+
             .hero {
                 padding: 40px 0;
                 min-height: 100vh;
             }
-            
+
             .name {
                 font-size: 2.2rem;
                 margin-bottom: 24px;
                 line-height: 1.1;
             }
-            
+
             .message-card {
                 padding: 20px 16px;
                 margin-bottom: 30px;
             }
-            
+
             .message {
                 font-size: 0.9rem;
                 line-height: 1.5;
             }
-            
+
             .qualities-section {
                 margin-bottom: 50px;
             }
-            
+
             .qualities-title {
                 font-size: 0.95rem;
                 margin-bottom: 16px;
             }
-            
+
             .qualities {
                 grid-template-columns: 1fr;
                 gap: 12px;
             }
-            
+
             .quality {
                 padding: 20px 16px;
             }
-            
+
             .quality-emoji {
                 font-size: 1.8rem;
                 margin-bottom: 8px;
             }
-            
+
             .quality-text {
                 font-size: 0.85rem;
             }
-            
+
             .hug-section {
                 padding: 30px 20px;
                 margin-bottom: 40px;
             }
-            
+
             .hug-title {
                 font-size: 1.1rem;
                 margin-bottom: 20px;
             }
-            
+
             .hug-emoji {
                 font-size: 3rem;
                 margin: 15px 0;
             }
-            
+
             .hug-btn {
                 padding: 10px 28px;
                 font-size: 0.9rem;
                 width: 100%;
                 max-width: 200px;
             }
-            
+
             .final-message {
                 padding: 30px 20px;
             }
-            
+
             .final-title {
                 font-size: 1.25rem;
                 margin-bottom: 12px;
                 line-height: 1.3;
             }
-            
+
             .final-text {
                 font-size: 1rem;
             }
@@ -310,16 +394,20 @@
             .container {
                 padding: 0 24px;
             }
-            
+
+            .gift-box {
+                font-size: 5rem;
+            }
+
             .name {
                 font-size: 2.8rem;
             }
-            
+
             .qualities {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 16px;
             }
-            
+
             .hug-section {
                 padding: 35px 30px;
             }
@@ -330,7 +418,7 @@
             .hero {
                 padding: 80px 0;
             }
-            
+
             .qualities {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 24px;
@@ -342,19 +430,23 @@
             .container {
                 padding: 0 16px;
             }
-            
+
+            .gift-box {
+                font-size: 3.5rem;
+            }
+
             .name {
                 font-size: 2rem;
             }
-            
+
             .message {
                 font-size: 0.9rem;
             }
-            
+
             .hug-section {
                 padding: 24px 16px;
             }
-            
+
             .hug-btn {
                 padding: 8px 24px;
                 font-size: 0.85rem;
@@ -364,44 +456,56 @@
 </head>
 <body>
     <div class="container">
-        <div class="hero">
-            <h1 class="name">Luanna</h1>
-            
-            <div class="message-card">
-                <p class="message">
-                    Quando cheguei aqui, você me acolheu com carinho. Sua bondade e atenção não passaram despercebidas. Muito obrigada!
-                </p>
+        <!-- Gift Section -->
+        <div class="gift-section" id="giftSection">
+            <div class="gift-container" onclick="openGift()">
+                <div class="gift-box">🎁</div>
+                <div class="gift-message">Para Luanna</div>
+                <div class="gift-instruction">Clique no presente para abrir!</div>
             </div>
-            
-            <div class="qualities-section">
-                <h2 class="qualities-title">Suas Qualidades (Comigo kkkk)</h2>
-                <div class="qualities">
-                    <div class="quality">
-                        <span class="quality-emoji">💬</span>
-                        <div class="quality-text">Comunicativa</div>
-                    </div>
-                    <div class="quality">
-                        <span class="quality-emoji">😊</span>
-                        <div class="quality-text">Alegre</div>
-                    </div>
-                    <div class="quality">
-                        <span class="quality-emoji">💝</span>
-                        <div class="quality-text">Cuidadosa</div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent">
+            <div class="hero">
+                <h1 class="name">Luanna</h1>
+
+                <div class="message-card">
+                    <p class="message">
+                        Quando cheguei aqui, você me acolheu com carinho. Sua bondade e atenção não passaram despercebidas. Muito obrigada!
+                    </p>
+                </div>
+
+                <div class="qualities-section">
+                    <h2 class="qualities-title">Suas Qualidades (Comigo kkkk)</h2>
+                    <div class="qualities">
+                        <div class="quality">
+                            <span class="quality-emoji">💬</span>
+                            <div class="quality-text">Comunicativa</div>
+                        </div>
+                        <div class="quality">
+                            <span class="quality-emoji">😊</span>
+                            <div class="quality-text">Alegre</div>
+                        </div>
+                        <div class="quality">
+                            <span class="quality-emoji">💝</span>
+                            <div class="quality-text">Cuidadosa</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="hug-section">
-                <h3 class="hug-title">Abraço Virtual</h3>
-                <span class="hug-emoji" id="hugEmoji">🤗</span>
-                <button class="hug-btn" id="hugBtn" onclick="sendHug()">
-                    Clique aqui!
-                </button>
-            </div>
-            
-            <div class="final-message">
-                <h3 class="final-title">Continue sendo essa pessoa incrível! ✨</h3>
-                <p class="final-text">Obrigada por ser quem você é!</p>
+
+                <div class="hug-section">
+                    <h3 class="hug-title">Abraço Virtual</h3>
+                    <span class="hug-emoji" id="hugEmoji">🤗</span>
+                    <button class="hug-btn" id="hugBtn" onclick="sendHug()">
+                        Clique aqui!
+                    </button>
+                </div>
+
+                <div class="final-message">
+                    <h3 class="final-title">Continue sendo essa pessoa incrível! ✨</h3>
+                    <p class="final-text">Obrigada por ser quem você é!</p>
+                </div>
             </div>
         </div>
     </div>
@@ -409,29 +513,43 @@
     <script>
         let isHugging = false;
 
+        function openGift() {
+            const giftSection = document.getElementById('giftSection');
+            const mainContent = document.getElementById('mainContent');
+            
+            // Hide gift section
+            giftSection.style.transition = 'opacity 0.5s ease';
+            giftSection.style.opacity = '0';
+            
+            setTimeout(() => {
+                giftSection.style.display = 'none';
+                mainContent.classList.add('show');
+            }, 500);
+        }
+
         function sendHug() {
             if (isHugging) return;
-            
+
             isHugging = true;
-            
+
             const btn = document.getElementById('hugBtn');
             const emoji = document.getElementById('hugEmoji');
             const message = document.getElementById('hugMessage');
-            
+
             btn.textContent = 'Abraçando... 🤗';
             btn.disabled = true;
-            
+
             emoji.classList.add('animated');
-            
+
             setTimeout(() => {
-                message.classList.add('show');
+                if (message) message.classList.add('show');
             }, 300);
-            
+
             setTimeout(() => {
                 btn.textContent = 'Clique aqui!';
                 btn.disabled = false;
                 emoji.classList.remove('animated');
-                message.classList.remove('show');
+                if (message) message.classList.remove('show');
                 isHugging = false;
             }, 3000);
         }
